@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AdminUserList from '../components/AdminUserList'
-import { api, safeCall } from '../../backend-plastic/services/api'
+import { api, safeCall } from '../services/api'
 
 
 export default function AdminDashboard({ user }) {

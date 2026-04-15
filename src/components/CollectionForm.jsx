@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { api, safeCall } from '../../backend-plastic/services/api'
+import { api, safeCall } from '../services/api'
 
 
 export default function CollectionForm({ userId, onRecorded }) {
