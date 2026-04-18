@@ -21,6 +21,7 @@ router.get('/admin/users', async (req, res) => {
     console.error(err)
     res.status(500).json({ error: 'Failed to load users' })
   }
+  })
 
   
 router.post('/admin/users/:id/approve-reward', async (req, res) => {
