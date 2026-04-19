@@ -49,6 +49,5 @@ router.post('/admin/users/:id/approve-reward', async (req, res) => {
     res.status(500).json({ error: 'Failed to approve reward' })
   }
 })
-})
 
 export default router
