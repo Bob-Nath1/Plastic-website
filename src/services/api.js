@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.VITE_API_BASE;
+const API_URL = import.meta.env.VITE_API_BASE || "https://plastic-website.onrender.com/api";
+;
 
 export const api = {
   get: async (endpoint) => {

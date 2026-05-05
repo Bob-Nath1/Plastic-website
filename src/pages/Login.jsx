@@ -1,12 +1,23 @@
 import React from 'react'
 import AuthForm from '../components/AuthForm'
 import { api, safeCall } from '../services/api'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Login({ onLogin }) {
+
+const navigate = useNavigate()
+
 async function handleSubmit(values) {
-const data = await safeCall(() => api.login(values), { id: 'local-1', name: 'Demo User', role: values.email === 'admin@x.com' ? 'admin' : 'user' })
+const data = await safeCall(() => api.login(values),
+
+
+
+{ id: 'local-1', name: 'Demo User', role: values.email === 'admin@x.com' ? 'admin' : 'user' })
+
 onLogin(data)
+
+   navigate('/user')
 }
 
 

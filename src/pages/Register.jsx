@@ -1,10 +1,14 @@
 import React from 'react'
 import AuthForm from '../components/AuthForm'
 import { api, safeCall } from '../services/api'
+import { useNavigate } from 'react-router-dom'
 
 export default function Register({ onRegister }) {
 
+    const navigate = useNavigate()
+
   async function handleSubmit(values) {
+    console.log('Register form submitted with values:', values);
     try {
       const data = await safeCall(
         () => api.post('/auth/register', values),
@@ -15,9 +19,10 @@ export default function Register({ onRegister }) {
       const user = data?.user ||
        data?.data?.user || data
 
-      if (onRegister) {
-        onRegister(user)
-      }
+     onRegister?.(user)
+
+
+       navigate('/user')
 
     } catch (err) {
       console.error('Register error:', err)
@@ -31,3 +36,11 @@ export default function Register({ onRegister }) {
     </div>
   )
 }
+
+
+
+
+
+
+
+
