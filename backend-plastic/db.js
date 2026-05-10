@@ -24,7 +24,7 @@ pool.connect()
     client.release();
   })
   .catch((err) => {
-    console.error("❌ Failed to connect to PostgreSQL:", err.message);
+    console.error("❌ Failed to connect to PostgreSQL:", err);
   });
 
 export default pool;

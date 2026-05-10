@@ -4,7 +4,11 @@ import pool from '../db.js';
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
+console.log("Route hit")
+
   const { name, email, password } = req.body;
+    console.log("📩 REQUEST BODY:", req.body);
+
 
   if (!name || !email || !password) {
     return res.status(400).json({ 
@@ -13,6 +17,15 @@ router.post("/register", async (req, res) => {
   }
   
   try {
+
+    // CHECK DATABASE CONTEXT
+    const dbInfo = await pool.query(`
+      SELECT current_database() AS db,
+             current_schema() AS schema;
+    `);
+
+    console.log("🧠 DB CONTEXT:", dbInfo.rows[0]);
+
     const result = await pool.query(
       `INSERT INTO users (name, email, password, role) 
        VALUES ($1, $2, $3, 'user') 
@@ -23,6 +36,13 @@ router.post("/register", async (req, res) => {
     const newUser = result.rows[0];
 
     console.log(`✅ New user registered: ${newUser.email}`);
+
+     // CHECK ALL USERS
+    const allUsers = await pool.query(`
+      SELECT * FROM users
+    `);
+
+    console.log("📊 ALL USERS:", allUsers.rows);
 
     res.status(201).json({
       success: true,
