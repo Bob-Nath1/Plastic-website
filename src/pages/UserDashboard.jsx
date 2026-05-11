@@ -14,8 +14,8 @@ const totalKg = collections.reduce((s, c) => s + (c.kg || 0), 0)
 
 useEffect(() => {
 async function load() {
-const data = await safeCall(() => api.getCollectionsForUser(user.id), [{ id: 'mock-1', kg: 2, date: new Date().toISOString() }])
-setCollections(data)
+const res = await api.getCollectionsForUser(user.id);
+setCollections(res.data);
 }
 load()
 }, [user.id])

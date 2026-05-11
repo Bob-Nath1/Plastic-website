@@ -28,6 +28,7 @@ return (
 <input name="password" type="password" value={form.password} onChange={change} className="w-full border p-2 rounded" />
 </div>
 <button type="submit" disabled={submitting} className="w-full py-2 bg-blue-600 text-white rounded" >{mode === 'register' ? 'Create account' : 'Login'}</button>
+
 </form>
 )
 }
