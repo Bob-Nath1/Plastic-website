@@ -30,10 +30,8 @@ export default function Register({ onRegister }) {
   return (
     <div className="max-w-lg mx-auto bg-white p-6 rounded shadow">
       <h2 className="text-xl font-semibold mb-4">Register
-        console.log('Register payload:', values);
       </h2>
       <AuthForm mode="register" onSubmit={handleSubmit} />
-      console.log('Register payload:', values);
     </div>
   )
 }
