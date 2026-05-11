@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_BASE || "https://plastic-website.onrender.com/api";
+const API_URL = import.meta.env.VITE_API_BASE || "https://plastic-website.onrender.com";
 ;
 
 export const api = {
@@ -17,10 +17,11 @@ export const api = {
   },
 };
 
-export const safeCall = async (fn) => {
+export const safeCall = async (fn, fallback = null) => {
   try {
     return await fn();
   } catch (err) {
-    console.error(err);
+    console.error("API ERROR:", err);
+    return fallback;
   }
 };
