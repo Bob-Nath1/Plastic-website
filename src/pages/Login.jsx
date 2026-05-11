@@ -9,15 +9,20 @@ export default function Login({ onLogin }) {
 const navigate = useNavigate()
 
 async function handleSubmit(values) {
-const data = await safeCall(() => api.login(values),
+  try {
+    const response = await api.post('/auth/login', values)
 
+    const data = response.data.user
 
+    console.log("LOGIN SUCCESS:", data)
 
-{ id: 'local-1', name: 'Demo User', role: values.email === 'admin@x.com' ? 'admin' : 'user' })
+    onLogin(data)
 
-onLogin(data)
+    navigate('/user')
 
-   navigate('/user')
+  } catch (err) {
+    console.error("LOGIN ERROR:", err)
+  }
 }
 
 

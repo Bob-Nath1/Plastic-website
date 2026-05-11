@@ -65,4 +65,53 @@ console.log("Route hit")
   }
 });
 
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  console.log("🔥 LOGIN ROUTE HIT");
+  console.log("📩 LOGIN BODY:", req.body);
+
+  try {
+    const result = await pool.query(
+      `SELECT id, name, email, role, password
+       FROM users
+       WHERE email = $1`,
+      [email]
+    );
+
+    const user = result.rows[0];
+
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid email or password"
+      });
+    }
+
+    if (user.password !== password) {
+      return res.status(401).json({
+        error: "Invalid email or password"
+      });
+    }
+
+    console.log("✅ LOGIN SUCCESS:", user.email);
+
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+
+  } catch (err) {
+    console.error("LOGIN ERROR:", err);
+
+    res.status(500).json({
+      error: "Login failed"
+    });
+  }
+});
+
 export default router;
