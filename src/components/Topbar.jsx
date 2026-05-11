@@ -40,25 +40,15 @@ export default function Topbar({ user, onLogout }) {
         {/* Desktop Menu */}
         <nav className="hidden md:flex gap-3 font-bold text-[#1F2833]">
           <Link to="/">Home</Link>
-          {user ? (
-            <>
-              {user.role === "admin" ? (
-                <Link to="/admin">Admin</Link>
-              ) : (
-                <Link to="/user">Dashboard</Link>
-              )}
-              <button className="btn" onClick={onLogout}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">Login</Link>
-              <Link to="/register" className="ml-2">
-                Register
-              </Link>
-            </>
-          )}
+          <>
+  <Link to="/login">
+    Login
+  </Link>
+
+  <Link to="/register">
+    Register
+  </Link>
+</>
         </nav>
       </div>
 
@@ -67,30 +57,11 @@ export default function Topbar({ user, onLogout }) {
         <div className="md:hidden flex flex-col gap-3 bg-white p-4 font-bold text-[#1F2833]">
           <Link to="/" onClick={() => setOpen(false)}>Home</Link>
 
-          {user ? (
-            <>
-              {user.role === "admin" ? (
-                <Link to="/admin" onClick={() => setOpen(false)}>Admin</Link>
-              ) : (
-                <Link to="/user" onClick={() => setOpen(false)}>Dashboard</Link>
-              )}
+          <Link to="/login">Login</Link>
 
-              <button
-                className="text-left"
-                onClick={() => {
-                  onLogout();
-                  setOpen(false);
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" onClick={() => setOpen(false)}>Login</Link>
-              <Link to="/register" onClick={() => setOpen(false)}>Register</Link>
-            </>
-          )}
+<Link to="/register" className="ml-2">
+  Register
+</Link>
         </div>
       )}
     </header>

@@ -7,15 +7,15 @@ import { REWARD_THRESHOLDS } from '../utils/constants'
 import { api, safeCall } from '../services/api'
 
 
-export default function UserDashboard({ user }) {
+export default function UserDashboard({ user, onLogout }) {
 const [collections, setCollections] = useState([])
 const totalKg = collections.reduce((s, c) => s + (c.kg || 0), 0)
 
 
 useEffect(() => {
 async function load() {
-const res = await api.getCollectionsForUser(user.id);
-setCollections(res.data);
+const data = await safeCall(() => api.getCollectionsForUser(user.id), [{ id: 'mock-1', kg: 2, date: new Date().toISOString() }])
+setCollections(data)
 }
 load()
 }, [user.id])
@@ -24,6 +24,14 @@ return (
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 <section className="col-span-2 bg-white p-6 rounded shadow">
 <h2 className="text-xl font-semibold">Welcome, {user.name || 'member'}</h2>
+
+<button
+  onClick={onLogout}
+  className="mt-3 px-4 py-2 bg-red-500 text-white rounded"
+>
+  Logout
+</button>
+
 <p className="text-sm text-gray-600">Total collected: <strong>{totalKg.toFixed(2)} kg</strong></p>
 
 

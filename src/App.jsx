@@ -23,8 +23,14 @@ return (
 <Route path="/login" element={<Login onLogin={auth.login} />} />
 
 
-<Route path="/user" element={auth.user ? <UserDashboard user={auth.user} /> : <Navigate to="/login" replace />} />
-<Route path="/admin" element={auth.user?.role === 'admin' ? <AdminDashboard user={auth.user} /> : <Navigate to="/login" replace />} />
+<Route path="/user" element={auth.user ? <UserDashboard 
+  user={auth.user} 
+  onLogout={auth.logout} 
+/>: <Navigate to="/login" replace />} />
+<Route path="/admin" element={auth.user?.role === 'admin' ? <AdminDashboard 
+  user={auth.user} 
+  onLogout={auth.logout} 
+/> : <Navigate to="/login" replace />} />
 
 
 <Route path="*" element={<div className="py-20 text-center">Page not found</div>} />

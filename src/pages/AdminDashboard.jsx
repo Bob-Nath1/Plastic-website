@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminUserList from '../components/AdminUserList'
 import { api, safeCall } from '../services/api'
 
-export default function AdminDashboard({ user }) {
+export default function AdminDashboard({ user, onLogout }) {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -24,6 +24,13 @@ export default function AdminDashboard({ user }) {
         <h2 className="text-xl font-semibold">
           Admin — manage users & rewards
         </h2>
+
+        <button
+  onClick={onLogout}
+  className="mt-3 px-4 py-2 bg-red-500 text-white rounded"
+>
+  Logout
+</button>
 
         <div className="mt-4">
           <AdminUserList
