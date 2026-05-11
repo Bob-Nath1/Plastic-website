@@ -27,7 +27,7 @@ app.use(cors({
 app.use(express.json())
 
 // ✅ routes
-app.use('/api/auth', authRoutes)
+app.use('/auth', authRoutes)
 app.use('/api/pickups', pickupRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/reports', reportRoutes)

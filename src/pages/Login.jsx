@@ -12,12 +12,16 @@ async function handleSubmit(values) {
   try {
     const response = await api.post('/auth/login', values)
 
-    const data = response.data.user
+    console.log("LOGIN RESPONSE:", response)
 
-    console.log("LOGIN SUCCESS:", data)
+    const user = response?.user
 
-    onLogin(data)
+    if (!user) {
+      console.error("No user returned from backend")
+      return
+    }
 
+    onLogin(user)
     navigate('/user')
 
   } catch (err) {
