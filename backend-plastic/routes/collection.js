@@ -3,7 +3,8 @@ import pool from '../db.js'
 
 const router = express.Router()
 
-router.get('/collections/:userId', async (req, res) => {
+// ❌ REMOVE /collections here
+router.get('/:userId', async (req, res) => {
   try {
     const { userId } = req.params
 
@@ -22,7 +23,6 @@ router.get('/collections/:userId', async (req, res) => {
 
   } catch (err) {
     console.error(err)
-
     res.status(500).json({
       error: 'Failed to load collections'
     })
