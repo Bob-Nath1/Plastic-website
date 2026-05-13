@@ -13,12 +13,16 @@ const totalKg = collections.reduce((s, c) => s + (c.kg || 0), 0)
 
 
 useEffect(() => {
-async function load() {
-const data = await safeCall(() => api.getCollectionsForUser(user.id), [{ id: 'mock-1', kg: 2, date: new Date().toISOString() }])
-setCollections(data)
-}
-load()
-}, [user.id])
+  const mockData = [
+    {
+      id: 'mock-1',
+      kg: 2,
+      date: new Date().toISOString()
+    }
+  ]
+
+  setCollections(mockData)
+}, [])
 
 return (
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
