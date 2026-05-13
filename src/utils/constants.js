@@ -1,5 +1,1 @@
-export const REWARD_THRESHOLDS = {
-  bronze: 10,
-  silver: 50,
-  gold: 100,
-};
+export const REWARD_THRESHOLDS = [5, 10, 15, 30]

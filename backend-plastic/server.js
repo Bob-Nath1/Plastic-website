@@ -8,6 +8,7 @@ import pickupRoutes from './routes/pickups.js'
 import adminRoutes from './routes/admin.js'
 import reportRoutes from './routes/reports.js'
 import authRoutes from './routes/auth.js'
+import collectionRoutes from './routes/collections.js'
 
 
 const app = express()
@@ -31,6 +32,7 @@ app.use('/auth', authRoutes)
 app.use('/api/pickups', pickupRoutes)
 app.use('/api/admin', adminRoutes)
 app.use('/api/reports', reportRoutes)
+app.use('/api/collections', collectionRoutes)
 
 // ✅ test route (optional)
 app.get('/', (req, res) => {

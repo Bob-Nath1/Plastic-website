@@ -1,69 +1,46 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Topbar({ user, onLogout }) {
+export default function Topbar({ isHome }) {
   const [open, setOpen] = useState(false);
+
+  const closeMenu = () => setOpen(false);
 
   return (
     <header className="bg-white shadow">
       <div className="container mx-auto flex items-center justify-between p-4">
-        
+
         {/* Logo */}
         <Link to="/" className="font-bold text-blue-950 text-2xl">
-          PlasticLoop
+          {isHome ? "PlasticLoop" : "Home"}
         </Link>
 
-        {/* Hamburger Menu Button */}
+        {/* Hamburger */}
         <button
           className="md:hidden flex flex-col gap-1"
           onClick={() => setOpen(!open)}
         >
-          <span
-            className={`w-6 h-1 bg-black rounded transition-all duration-300 ${
-              open ? "rotate-45 translate-y-2" : ""
-            }`}
-          ></span>
-
-          <span
-            className={`w-6 h-1 bg-black rounded transition-all duration-300 ${
-              open ? "opacity-0" : ""
-            }`}
-          ></span>
-
-          <span
-            className={`w-6 h-1 bg-black rounded transition-all duration-300 ${
-              open ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          ></span>
+          <span className={`w-6 h-1 bg-black rounded ${open ? "rotate-45 translate-y-2" : ""}`} />
+          <span className={`w-6 h-1 bg-black rounded ${open ? "opacity-0" : ""}`} />
+          <span className={`w-6 h-1 bg-black rounded ${open ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-3 font-bold text-[#1F2833]">
+        <nav className="hidden md:flex gap-4 font-bold text-[#1F2833]">
           <Link to="/">Home</Link>
-          <>
-  <Link to="/login">
-    Login
-  </Link>
-
-  <Link to="/register">
-    Register
-  </Link>
-</>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </nav>
       </div>
 
-      {/* Mobile Dropdown Menu (shows only when clicked) */}
+      {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden flex flex-col gap-3 bg-white p-4 font-bold text-[#1F2833]">
-          <Link to="/" onClick={() => setOpen(false)}>Home</Link>
-
-          <Link to="/login">Login</Link>
-
-<Link to="/register" className="ml-2">
-  Register
-</Link>
+        <div className="md:hidden flex flex-col gap-4 bg-white p-4 font-bold">
+          <Link to="/" onClick={closeMenu}>Home</Link>
+          <Link to="/login" onClick={closeMenu}>Login</Link>
+          <Link to="/register" onClick={closeMenu}>Register</Link>
         </div>
       )}
     </header>
-  );
+  )
 }

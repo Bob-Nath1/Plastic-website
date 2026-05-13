@@ -17,6 +17,11 @@ export const api = {
   },
 };
 
+getCollectionsForUser: async (userId) => {
+  const res = await fetch(`${API_URL}/api/collections/${userId}`);
+  return res.json();
+}
+
 export const safeCall = async (fn, fallback = null) => {
   try {
     return await fn();

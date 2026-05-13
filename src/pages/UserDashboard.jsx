@@ -13,28 +13,22 @@ const totalKg = collections.reduce((s, c) => s + (c.kg || 0), 0)
 
 
 useEffect(() => {
-  const mockData = [
-    {
-      id: 'mock-1',
-      kg: 2,
-      date: new Date().toISOString()
-    }
-  ]
+  async function load() {
+    const data = await safeCall(
+      () => api.getCollectionsForUser(user.id),
+      []
+    )
 
-  setCollections(mockData)
-}, [])
+    setCollections(data)
+  }
+
+  load()
+}, [user.id])
 
 return (
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 <section className="col-span-2 bg-white p-6 rounded shadow">
 <h2 className="text-xl font-semibold">Welcome, {user.name || 'member'}</h2>
-
-<button
-  onClick={onLogout}
-  className="mt-3 px-4 py-2 bg-red-500 text-white rounded"
->
-  Logout
-</button>
 
 <p className="text-sm text-gray-600">Total collected: <strong>{totalKg.toFixed(2)} kg</strong></p>
 
@@ -74,7 +68,18 @@ return (
 <h5 className="font-medium">Available rewards</h5>
 <RewardCard title="Starter Pack" threshold={5} description="Small staple bundle" />
 </div>
+<button
+  onClick={onLogout}
+  className="mt-3 px-4 py-2 bg-red-500 text-white rounded"
+>
+  Logout
+</button>
+
 </aside>
+
+
 </div>
+
+
 )
 }
